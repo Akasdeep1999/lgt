@@ -52,7 +52,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 py-16 border-b border-white/10">
 
             <div class="lg:col-span-4">
-                <a href="#">
+                <a href="{{ route('home') }}">
                     <img class="bg-white rounded-md p-3 max-w-[220px]" src="{{ asset('logo.png') }}" alt="footer logo">
                 </a>
                 <p class="text-xs text-slate-400 mt-4 leading-relaxed font-light pr-4">
@@ -221,7 +221,7 @@
         </div>
 
         <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-            <p>&copy; 2026 Let's Go Travels. All rights reserved. Designed with precision in Kolkata.</p>
+            <p>&copy; {{ date('Y') }} Let's Go Travels. All rights reserved. Designed with precision in Kolkata.</p>
 
             <div class="flex items-center gap-6">
                 <a href="#" class="hover:text-emerald-400 transition-colors">Privacy Policy</a>

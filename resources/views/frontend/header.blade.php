@@ -86,13 +86,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
 
-                <a href="#" class="flex items-center">
+                <a href="{{ route('home') }}" class="flex items-center">
                     <img src="{{ asset('logo.png') }}" alt="Lets go travel logo"
                         class="h-10 sm:h-12 w-auto object-contain">
                 </a>
 
                 <nav class="hidden lg:flex items-center space-x-7">
-                    <a href="#" class="text-sm font-semibold text-brand-600">Home</a>
+                    <a href="{{ route('home') }}" class="text-sm font-semibold text-brand-600">Home</a>
 
                     <div class="relative group">
                         <button class="text-sm font-medium hover:text-brand-600 flex items-center gap-1.5 py-6">
@@ -123,7 +123,8 @@
                                         class="font-montserrat font-bold text-xs uppercase tracking-wider text-brand-700 mb-3">
                                         Asia Highlights</h4>
                                     <ul class="space-y-2.5 text-sm text-slate-600">
-                                        <li><a href="#" class="hover:text-brand-600 flex items-center gap-2"><i
+                                        <li><a href="{{ route('tours') }}"
+                                                class="hover:text-brand-600 flex items-center gap-2"><i
                                                     class="fa-solid fa-arrow-right text-[10px] text-brand-500"></i>
                                                 Dubai & UAE Escapes</a></li>
                                         <li><a href="#" class="hover:text-brand-600 flex items-center gap-2"><i

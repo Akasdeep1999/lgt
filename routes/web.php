@@ -22,5 +22,6 @@ Route::middleware('auth')->group(function () {
 
 //Frontend routes
 Route::get('/', [FrontController::class, 'home'])->name('home');
+Route::get('tours', [FrontController::class, 'tour'])->name('tours');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

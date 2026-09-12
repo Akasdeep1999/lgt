@@ -10,4 +10,9 @@ class FrontController extends Controller
     {
         return view('frontend.home');
     }
+
+    public function tour()
+    {
+        return view('frontend.tour');
+    }
 }

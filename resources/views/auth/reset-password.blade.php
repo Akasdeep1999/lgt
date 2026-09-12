@@ -1,5 +1,14 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
+    <div class="mb-8">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Set New Password 🔐
+        </h2>
+        <p class="mt-2 text-xs sm:text-sm text-slate-500">
+            Please enter your email address and choose a strong new password for your account.
+        </p>
+    </div>
+
+    <form method="POST" action="{{ route('password.store') }}" class="space-y-5">
         @csrf
 
         <!-- Password Reset Token -->
@@ -7,33 +16,81 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <label for="email" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                {{ __('Email Address') }}
+            </label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <i class="fa-regular fa-envelope text-xs"></i>
+                </div>
+                <input id="email" type="email" name="email" value="{{ old('email', $request->email) }}" required
+                    autofocus autocomplete="username" placeholder="admin@letsgotravel.com"
+                    class="w-full pl-9 pr-4 py-3 text-xs font-medium rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 focus:outline-none transition duration-150 shadow-sm" />
+            </div>
+            <x-input-error :messages="$errors->get('email')" class="mt-2 text-xs text-rose-600 font-medium" />
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <!-- Password Field with Toggle Eye Icon -->
+        <div x-data="{ showPassword: false }">
+            <label for="password" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                {{ __('New Password') }}
+            </label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <i class="fa-solid fa-lock text-xs"></i>
+                </div>
+                <input id="password" :type="showPassword ? 'text' : 'password'" name="password" required
+                    autocomplete="new-password" placeholder="••••••••"
+                    class="w-full pl-9 pr-10 py-3 text-xs font-medium rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 focus:outline-none transition duration-150 shadow-sm" />
+
+                <!-- Toggle Eye Button -->
+                <button type="button" @click="showPassword = !showPassword"
+                    class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none transition duration-150">
+                    <i class="fa-solid" :class="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                </button>
+            </div>
+            <x-input-error :messages="$errors->get('password')" class="mt-2 text-xs text-rose-600 font-medium" />
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+        <!-- Confirm Password Field with Toggle Eye Icon -->
+        <div x-data="{ showConfirmPassword: false }">
+            <label for="password_confirmation"
+                class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                {{ __('Confirm New Password') }}
+            </label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <i class="fa-solid fa-shield-halved text-xs"></i>
+                </div>
+                <input id="password_confirmation" :type="showConfirmPassword ? 'text' : 'password'"
+                    name="password_confirmation" required autocomplete="new-password" placeholder="••••••••"
+                    class="w-full pl-9 pr-10 py-3 text-xs font-medium rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 focus:outline-none transition duration-150 shadow-sm" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                <!-- Toggle Eye Button -->
+                <button type="button" @click="showConfirmPassword = !showConfirmPassword"
+                    class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none transition duration-150">
+                    <i class="fa-solid" :class="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                </button>
+            </div>
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 text-xs text-rose-600 font-medium" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
+        <!-- Submit Button -->
+        <div class="pt-2">
+            <button type="submit"
+                class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md shadow-emerald-600/20 transition duration-200 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-key text-xs"></i>
                 {{ __('Reset Password') }}
-            </x-primary-button>
+            </button>
+        </div>
+
+        <!-- Back to Login Link -->
+        <div class="text-center pt-2">
+            <a href="{{ route('login') }}"
+                class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-emerald-600 transition">
+                <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                {{ __('Back to Sign In') }}
+            </a>
         </div>
     </form>
 </x-guest-layout>
